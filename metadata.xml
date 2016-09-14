@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="http://teiid903-stbcs.rhcloud.com/odata4/static/org.apache.olingo.v1.xml">
+        <edmx:Include Namespace="org.apache.olingo.v1" Alias="olingo-extensions" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Basplus_vdb.Basplus_viewmodel">
+            <EntityType Name="Articles">
+                <Key>
+                    <PropertyRef Name="Id" />
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="6" />
+                <Property Name="WholesalerId" Type="Edm.Int32" Nullable="false" />
+                <Property Name="Listprice" Type="Edm.Decimal" Precision="19" Scale="5" />
+                <Property Name="Deliverytime" Type="Edm.Int32" />
+                <Property Name="MaxBoDays" Type="Edm.Int32" />
+                <Property Name="Fillingrate" Type="Edm.Int32" />
+                <Property Name="Mechanical" Type="Edm.Decimal" Precision="19" Scale="5" />
+                <Property Name="Stock" Type="Edm.Int32" />
+                <Property Name="FrDtType" Type="Edm.Int32" />
+                <Property Name="SortcodeId" Type="Edm.String" MaxLength="1" />
+                <Property Name="GenreId" Type="Edm.String" MaxLength="3" />
+                <Property Name="Artist" Type="Edm.String" MaxLength="255" />
+                <Property Name="Title" Type="Edm.String" MaxLength="255" />
+                <Property Name="Eancode" Type="Edm.String" MaxLength="13" />
+                <Property Name="MajorId" Type="Edm.String" MaxLength="2" />
+                <Property Name="OriginId" Type="Edm.String" MaxLength="3" />
+                <Property Name="MediaId" Type="Edm.String" MaxLength="5" />
+                <Property Name="SubmediaId" Type="Edm.String" MaxLength="5" />
+                <Property Name="LabelId" Type="Edm.String" MaxLength="5" />
+                <Property Name="LanguageId" Type="Edm.String" MaxLength="2" />
+                <Property Name="StatuscodeId" Type="Edm.String" MaxLength="1" />
+                <Property Name="Suffix" Type="Edm.String" MaxLength="255" />
+                <Property Name="Infoline" Type="Edm.String" MaxLength="255" />
+                <Property Name="Prefix" Type="Edm.String" MaxLength="255" />
+                <Property Name="Releasedate" Type="Edm.DateTimeOffset" Precision="4" />
+                <Property Name="Activated" Type="Edm.DateTimeOffset" Precision="4" />
+                <Property Name="Units" Type="Edm.Int32" />
+                <Property Name="Eanpref" Type="Edm.Boolean" />
+            </EntityType>
+            <EntityType Name="Genres">
+                <Key>
+                    <PropertyRef Name="Id" />
+                </Key>
+                <Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="3" />
+                <Property Name="WholesalerId" Type="Edm.Int32" Nullable="false" />
+                <Property Name="MainGenre" Type="Edm.String" MaxLength="3" />
+                <Property Name="Description" Type="Edm.String" MaxLength="255" />
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Articles" EntityType="Basplus_viewmodel.Articles" />
+                <EntitySet Name="Genres" EntityType="Basplus_viewmodel.Genres" />
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
