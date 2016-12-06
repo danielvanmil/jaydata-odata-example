@@ -19,7 +19,7 @@ declare module $data{
     class GeometryMultiPolygon{}
     class GeometryMultiLineString{}
     class GeometryCollection{}
-    
+
     const enum EntityState{
         Detached = 0,
         Unchanged = 10,
@@ -27,7 +27,7 @@ declare module $data{
         Modified = 30,
         Deleted = 40
     }
-    
+
     interface MemberDefinition{
         name: string;
         type: any;
@@ -48,7 +48,7 @@ declare module $data{
         storeOnObject: boolean;
         monitorChanges: boolean;
     }
-    
+
     interface Event{
         attach(eventHandler: (sender: any, event: any) => void ): void;
         detach(eventHandler: () => void ): void;
@@ -58,34 +58,34 @@ declare module $data{
     class Base<T>{
         constructor();
         getType: () => typeof Base;
-        
+
         static addProperty(name:string, getterOrType:string | Function, setterOrGetter?:Function, setter?:Function): void;
         static addMember(name:string, definition:any, isClassMember?:boolean): void;
         static describeField(name:string, definition:any): void;
-        
+
         static hasMetadata(key:string, property?:string): boolean;
         static getAllMetadata(property?:string): any;
         static getMetadata(key:string, property?:string): any;
         static setMetadata(key:string, value:any, property?:string): void;
     }
-    
+
     class Enum extends Base<Enum>{
         static extend(name:string, instanceDefinition:any, classDefinition?:any): Base<Enum>;
     }
     function createEnum(name:string, enumType:any, enumDefinition?:any): Base<Enum>;
-    
+
     class Entity extends Base<Entity>{
         static extend(name:string, instanceDefinition:any, classDefinition?:any): Base<Entity>;
-        
+
         entityState: EntityState;
         changedProperties: MemberDefinition[];
-        
+
         propertyChanging: Event;
         propertyChanged: Event;
         propertyValidationError: Event;
         isValid: boolean;
     }
-    
+
     class EntitySet<Ttype extends typeof Entity, T extends Entity> extends Queryable<T>{
         add(item: T): T;
         add(initData: {}): T;
@@ -99,7 +99,7 @@ declare module $data{
         remove(item: {}): void;
         elementType: Ttype;
     }
-    
+
     class EntityContext extends Base<EntityContext>{
         constructor(config?: any);
         onReady(): Promise<EntityContext>;
@@ -130,7 +130,7 @@ declare module $data{
     }
     class ServiceAction{}
     class ServiceFunction{}
-    
+
     function implementation(name:string): typeof Base;
 }
 
@@ -175,13 +175,13 @@ declare module Edm {
         GeometryPoint | GeometryLineString | GeometryPolygon | GeometryMultiPoint | GeometryMultiLineString | GeometryMultiPolygon | GeometryCollection;
 }
 
-declare module Basplus_viewmodel {
+declare module vm {
 
     export class Container extends $data.EntityContext {
         onReady(): Promise<Container>;
 
-        Articles: $data.EntitySet<typeof Basplus_viewmodel.Articles, Basplus_viewmodel.Articles>;
-        Genres: $data.EntitySet<typeof Basplus_viewmodel.Genres, Basplus_viewmodel.Genres>;
+        Articles: $data.EntitySet<typeof vm.Articles, vm.Articles>;
+        Genres: $data.EntitySet<typeof vm.Genres, vm.Genres>;
     }
 
     export class Genres extends $data.Entity {
@@ -196,7 +196,7 @@ declare module Basplus_viewmodel {
 
     export class Articles extends $data.Entity {
         constructor();
-        constructor(initData: { Id?: Edm.String; WholesalerId?: Edm.Int32; Listprice?: Edm.Decimal; Deliverytime?: Edm.Int32; MaxBoDays?: Edm.Int32; Fillingrate?: Edm.Int32; Mechanical?: Edm.Decimal; Stock?: Edm.Int32; FrDtType?: Edm.Int32; SortcodeId?: Edm.String; GenreId?: Edm.String; Artist?: Edm.String; Title?: Edm.String; Eancode?: Edm.String; MajorId?: Edm.String; OriginId?: Edm.String; MediaId?: Edm.String; SubmediaId?: Edm.String; LabelId?: Edm.String; LanguageId?: Edm.String; StatuscodeId?: Edm.String; Suffix?: Edm.String; Infoline?: Edm.String; Prefix?: Edm.String; Releasedate?: Edm.DateTimeOffset; Activated?: Edm.DateTimeOffset; Units?: Edm.Int32; Eanpref?: Edm.Boolean });
+        constructor(initData: { Id?: Edm.String; WholesalerId?: Edm.Int32; Listprice?: Edm.Decimal; Deliverytime?: Edm.Int32; MaxBoDays?: Edm.Int32; Fillingrate?: Edm.Int32; Mechanical?: Edm.Decimal; Stock?: Edm.Int32; FrDtType?: Edm.Int32; SortcodeId?: Edm.String; GenreId?: Edm.String; Artist?: Edm.String; Title?: Edm.String; Eancode?: Edm.String; MajorId?: Edm.String; OriginId?: Edm.String; MediaId?: Edm.String; SubmediaId?: Edm.String; LabelId?: Edm.String; LanguageId?: Edm.String; StatuscodeId?: Edm.String; Suffix?: Edm.String; Infoline?: Edm.String; Prefix?: Edm.String; Releasedate?: Edm.DateTimeOffset; Activated?: Edm.DateTimeOffset; Units?: Edm.Int32; Eanpref?: Edm.Boolean; coverartarchiveUrl?: Edm.String });
 
         Id: Edm.String;
         WholesalerId: Edm.Int32;
@@ -226,9 +226,10 @@ declare module Basplus_viewmodel {
         Activated: Edm.DateTimeOffset;
         Units: Edm.Int32;
         Eanpref: Edm.Boolean;
+        coverartarchiveUrl: Edm.String;
     }
 
 }
 
-export var type: typeof Basplus_viewmodel.Container;
-export var factory: (config:any) => Basplus_viewmodel.Container;
+//export var type: typeof vm.Container;
+//export var factory: (config:any) => vm.Container;

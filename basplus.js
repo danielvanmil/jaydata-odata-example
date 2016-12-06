@@ -6,7 +6,7 @@
 
     var types = {};
 
-    types["Basplus_viewmodel.Articles"] = $data("$data.Entity").extend("Basplus_viewmodel.Articles", {
+    types["vm.Articles"] = $data("$data.Entity").extend("vm.Articles", {
         Id: {
             "type": "Edm.String",
             "nullable": false,
@@ -111,10 +111,14 @@
         },
         Eanpref: {
             "type": "Edm.Boolean"
+        },
+        coverartarchiveUrl: {
+            "type": "Edm.String",
+            "maxLength": 255
         }
     });
 
-    types["Basplus_viewmodel.Genres"] = $data("$data.Entity").extend("Basplus_viewmodel.Genres", {
+    types["vm.Genres"] = $data("$data.Entity").extend("vm.Genres", {
         Id: {
             "type": "Edm.String",
             "nullable": false,
@@ -137,14 +141,14 @@
         }
     });
 
-    exports.type = types["Basplus_viewmodel.Container"] = $data("$data.EntityContext").extend("Basplus_viewmodel.Container", {
+    exports.type = types["vm.Container"] = $data("$data.EntityContext").extend("vm.Container", {
         Articles: {
             "type": "$data.EntitySet",
-            "elementType": "Basplus_viewmodel.Articles"
+            "elementType": "vm.Articles"
         },
         Genres: {
             "type": "$data.EntitySet",
-            "elementType": "Basplus_viewmodel.Genres"
+            "elementType": "vm.Genres"
         }
     });
 
@@ -153,7 +157,7 @@
         if (ctxType) {
             var cfg = $data.typeSystem.extend({
                 name: "oData",
-                oDataServiceHost: "http://teiid903-stbcs.rhcloud.com//odata4/Basplus_vdb/Basplus_viewmodel",
+                oDataServiceHost: "http://localhost:8080/odata4/public/vm",
                 withCredentials: false,
                 maxDataServiceVersion: "4.0"
             }, config);
